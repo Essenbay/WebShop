@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <form action="#" th:action="@{/fruit-create}" th:object="${fruit}" method="post">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Name</span>
+                    <input type="text" class="form-control" placeholder="Name" th:field="*{name}" id="name"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Price</span>
+                    <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Price"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Expiration Date</span>
+                    <input type="date" class="form-control" th:field="*{expirationDate}" id="expirationDate"
+                           placeholder="ExpirationDate">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Volume</span>
+                    <input type="text" class="form-control" placeholder="Volume" th:field="*{volume}" id="volume"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Brand</span>
+                    <select class="form-select" name="brand_id">
+                        <option th:each="brand : ${brands}" th:value="${brand.id}"
+                                th:text="${brand.name} + ${' '} + ${brand.country}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success mb-3" value="Create Fruit">Add Fruit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

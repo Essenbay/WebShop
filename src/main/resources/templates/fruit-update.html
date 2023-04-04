@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-6 offset-3">
-            <form action="#" th:action="@{/item-update}" th:object="${item}" method="post">
+            <form action="#" th:action="@{/fruit-update}" th:object="${fruit}" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">ID</span>
                     <input class="form-control" readonly type="number" th:field="*{id}" id="id" placeholder="ID"
@@ -22,6 +22,11 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Name</span>
                     <input type="text" class="form-control" placeholder="Name" th:field="*{name}" id="name"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Volume</span>
+                    <input type="text" class="form-control" placeholder="Volume" th:field="*{volume}" id="volume"
                            aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div class="input-group mb-3">
@@ -34,7 +39,15 @@
                     <input type="date" class="form-control" th:field="*{expirationDate}" id="expirationDate"
                            placeholder="ExpirationDate">
                 </div>
-                <button type="submit" class="btn btn-info mb-3" value="Update item">Update Item</button>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Brand</span>
+                    <select class="form-select" name="brand_id">
+                        <option th:each="brand : ${brands}" th:value="${brand.id}"
+                                th:text="${brand.name} + ${' '} + ${brand.country}"
+                                th:selected="${brand.id == fruit.brand.id}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-info mb-3" value="Update fruit">Update Fruit</button>
             </form>
         </div>
     </div>
