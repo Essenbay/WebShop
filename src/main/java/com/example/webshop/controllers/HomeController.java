@@ -8,6 +8,11 @@ import com.example.webshop.services.BrandsServices;
 import com.example.webshop.services.FruitsService;
 import com.example.webshop.services.GardenProductsService;
 import com.example.webshop.services.VegetableService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -34,6 +40,17 @@ public class HomeController {
 
     @GetMapping("/products")
     public String findAll(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isNotAuthorized = authentication == null || authentication.getPrincipal().equals("anonymousUser");
+        boolean hasAdminRole;
+        if (isNotAuthorized) {
+            hasAdminRole = false;
+        } else {
+            hasAdminRole = authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+        }
+        model.addAttribute("hasAdminRole", hasAdminRole);
+        model.addAttribute("isAuthorized", !isNotAuthorized);
+
         List<GardenProduct> products = new ArrayList<>(fruitsService.getAllFruits());
         products.addAll(vegetableService.getAllVegetables());
         model.addAttribute("products", products);
