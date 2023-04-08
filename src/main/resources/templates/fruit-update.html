@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-6 offset-3">
-            <form action="#" th:action="@{/fruit-update}" th:object="${fruit}" method="post">
+            <form action="#" th:action="@{/products/fruit-update}" th:object="${fruit}" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">ID</span>
                     <input class="form-control" readonly type="number" th:field="*{id}" id="id" placeholder="ID"

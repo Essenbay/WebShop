@@ -71,18 +71,18 @@
                         <td th:text="${product.brand.name} + ${' '} + ${product.brand.country}"></td>
                         <td>
                             <a th:if="${product.isFruit()}" class="btn btn-warning" role="button"
-                               th:href="@{fruit-update/{id}(id=${product.id})}">Update Fruit</a>
+                               th:href="@{products/fruit-update/{id}(id=${product.id})}">Update Fruit</a>
                             <a th:if="${product.isVegetable()}" class="btn btn-warning" role="button"
-                               th:href="@{vegetable-update/{id}(id=${product.id})}">Update Vegetable</a></td>
+                               th:href="@{products/vegetable-update/{id}(id=${product.id})}">Update Vegetable</a></td>
                         <td>
                             <a class="btn btn-danger" role="button"
-                               th:href="@{product-delete/{id}(id=${product.id})}">Delete</a></td>
+                               th:href="@{products/product-delete/{id}(id=${product.id})}">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <a class="btn btn-primary" role="button" href="/fruit-create">ADD FRUIT</a>
-            <a class="btn btn-primary" role="button" href="/vegetable-create">ADD VEGETABLE</a>
+            <a class="btn btn-primary" role="button" href="/products/fruit-create">ADD FRUIT</a>
+            <a class="btn btn-primary" role="button" href="/products/vegetable-create">ADD VEGETABLE</a>
 
         </div>
     </div>

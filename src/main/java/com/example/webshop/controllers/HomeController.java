@@ -57,7 +57,7 @@ public class HomeController {
         return "product-list";
     }
 
-    @GetMapping("/fruit-create")
+    @GetMapping("/products/fruit-create")
     public String createFruitForm(Fruit fruit, Model model) {
         model.addAttribute("fruit", fruit);
         List<Brand> brands = brandsServices.getAllBrands();
@@ -65,7 +65,7 @@ public class HomeController {
         return "fruit-create";
     }
 
-    @PostMapping("/fruit-create")
+    @PostMapping("/products/fruit-create")
     public String createFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         fruit.setBrand(brand);
@@ -73,7 +73,7 @@ public class HomeController {
         return "redirect:/products";
     }
 
-    @GetMapping("/vegetable-create")
+    @GetMapping("/products/vegetable-create")
     public String createVegetableForm(Vegetable vegetable, Model model) {
         model.addAttribute("vegetable", vegetable);
         List<Brand> brands = brandsServices.getAllBrands();
@@ -81,7 +81,7 @@ public class HomeController {
         return "vegetable-create";
     }
 
-    @PostMapping("/vegetable-create")
+    @PostMapping("/products/vegetable-create")
     public String createVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         vegetable.setBrand(brand);
@@ -89,13 +89,13 @@ public class HomeController {
         return "redirect:/products";
     }
 
-    @GetMapping("product-delete/{id}")
+    @GetMapping("/products/product-delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         gardenProductsService.deleteProductById(id);
         return "redirect:/products";
     }
 
-    @GetMapping("/fruit-update/{id}")
+    @GetMapping("/products/fruit-update/{id}")
     public String updateFruitForm(@PathVariable("id") Long id, Model model) {
         Fruit fruit = fruitsService.getFruitById(id);
         model.addAttribute("fruit", fruit);
@@ -104,7 +104,7 @@ public class HomeController {
         return "fruit-update";
     }
 
-    @PostMapping("/fruit-update")
+    @PostMapping("/products/fruit-update")
     public String updateFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         fruit.setBrand(brand);
@@ -112,7 +112,7 @@ public class HomeController {
         return "redirect:/products";
     }
 
-    @GetMapping("/vegetable-update/{id}")
+    @GetMapping("/products/vegetable-update/{id}")
     public String updateVegetableForm(@PathVariable("id") Long id, Model model) {
         Vegetable vegetable = vegetableService.getVegetableById(id);
         model.addAttribute("vegetable", vegetable);
@@ -121,7 +121,7 @@ public class HomeController {
         return "vegetable-update";
     }
 
-    @PostMapping("/vegetable-update")
+    @PostMapping("/products/vegetable-update")
     public String updateVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         vegetable.setBrand(brand);

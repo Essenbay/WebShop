@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-6 offset-3">
-            <form action="#" th:action="@{/fruit-create}" th:object="${fruit}" method="post">
+            <form action="#" th:action="@{/products/fruit-create}" th:object="${fruit}" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Name</span>
                     <input type="text" class="form-control" placeholder="Name" th:field="*{name}" id="name"
