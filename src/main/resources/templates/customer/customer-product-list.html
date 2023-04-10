@@ -20,7 +20,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li th:if="${isAuthorized == false}"  class="nav-item">
+                <li th:if="${isAuthorized == false}" class="nav-item">
                     <a class="nav-link active" aria-current="page"
                        th:href="@{/register}">Register</a>
                 </li>
@@ -30,21 +30,17 @@
                     <a th:unless="${isAuthorized == false}" class="nav-link active" aria-current="page"
                        th:href="@{/logout}">Logout</a>
                 </li>
-                <li class="nav-item">
-                    <a th:unless="${isAuthorized == false}" class="nav-link active" aria-current="page"
-                       th:href="@{/users}">User List</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     <div class="col-10 offset-1">
-<!--        <div>-->
-<!--            <p class="display-5 text-center">Categories</p>-->
-<!--            <a class="btn btn-primary" role="button" href="/products/cat/fruit">Fruits</a>-->
-<!--            <a class="btn btn-primary" role="button" th:disabled="true" href="/products/cat/vegetables">Vegetables</a>-->
-<!--        </div>-->
+        <!--        <div>-->
+        <!--            <p class="display-5 text-center">Categories</p>-->
+        <!--            <a class="btn btn-primary" role="button" href="/products/cat/fruit">Fruits</a>-->
+        <!--            <a class="btn btn-primary" role="button" th:disabled="true" href="/products/cat/vegetables">Vegetables</a>-->
+        <!--        </div>-->
 
         <div th:switch="${products}">
             <h2 th:case="null">No items found!</h2>
@@ -69,21 +65,10 @@
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.getExpirationDate().toString()}"></td>
                         <td th:text="${product.brand.name} + ${' '} + ${product.brand.country}"></td>
-                        <td>
-                            <a th:if="${product.isFruit()}" class="btn btn-warning" role="button"
-                               th:href="@{products/fruit-update/{id}(id=${product.id})}">Update Fruit</a>
-                            <a th:if="${product.isVegetable()}" class="btn btn-warning" role="button"
-                               th:href="@{products/vegetable-update/{id}(id=${product.id})}">Update Vegetable</a></td>
-                        <td>
-                            <a class="btn btn-danger" role="button"
-                               th:href="@{products/product-delete/{id}(id=${product.id})}">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <a class="btn btn-primary" role="button" href="/products/fruit-create">ADD FRUIT</a>
-            <a class="btn btn-primary" role="button" href="/products/vegetable-create">ADD VEGETABLE</a>
-
         </div>
     </div>
 </div>

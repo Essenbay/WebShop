@@ -1,7 +1,6 @@
 package com.example.webshop.services;
 
-import com.example.webshop.models.Fruit;
-import com.example.webshop.models.GardenProduct;
+import com.example.webshop.models.models.Fruit;
 import com.example.webshop.repositories.FruitsRepository;
 import com.example.webshop.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

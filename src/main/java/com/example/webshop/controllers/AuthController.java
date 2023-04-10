@@ -1,7 +1,9 @@
 package com.example.webshop.controllers;
 
-import com.example.webshop.models.User;
+import com.example.webshop.models.models.Brand;
+import com.example.webshop.models.models.User;
 import com.example.webshop.models.dto.UserDto;
+import com.example.webshop.models.models.Vegetable;
 import com.example.webshop.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -46,16 +49,10 @@ public class AuthController {
         }
         if (result.hasErrors()) {
             model.addAttribute("user", user);
+            System.out.println(result.getAllErrors());
             return "register";
         }
         userService.saveUser(user);
         return "redirect:/register?success";
-    }
-
-    @GetMapping("/users")
-    public String listRegisteredUsers(Model model){
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "user-list";
     }
 }

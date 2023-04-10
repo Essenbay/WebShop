@@ -1,6 +1,6 @@
 package com.example.webshop.services;
 
-import com.example.webshop.models.Vegetable;
+import com.example.webshop.models.models.Vegetable;
 import com.example.webshop.repositories.VegetablesRepository;
 import com.example.webshop.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

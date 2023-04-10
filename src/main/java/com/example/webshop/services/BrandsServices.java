@@ -1,6 +1,6 @@
 package com.example.webshop.services;
 
-import com.example.webshop.models.Brand;
+import com.example.webshop.models.models.Brand;
 import com.example.webshop.repositories.BrandsRepository;
 import org.springframework.stereotype.Service;
 

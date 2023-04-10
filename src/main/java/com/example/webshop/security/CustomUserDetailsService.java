@@ -1,7 +1,7 @@
 package com.example.webshop.security;
 
-import com.example.webshop.models.Role;
-import com.example.webshop.models.User;
+import com.example.webshop.models.models.Role;
+import com.example.webshop.models.models.User;
 import com.example.webshop.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package com.example.webshop.models;
+package com.example.webshop.models.models;
 
 import java.util.Date;
 

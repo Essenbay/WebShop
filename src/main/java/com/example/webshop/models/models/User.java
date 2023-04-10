@@ -1,4 +1,4 @@
-package com.example.webshop.models;
+package com.example.webshop.models.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,11 +27,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {})
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")}
+    )
     private List<Role> roles = new ArrayList<>();
-
 }
