@@ -53,14 +53,13 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.getRolesString()}"></td>
             <td>
-                <a th:if="${user.getRolesString().contains('ROLE_ADMIN')}" class="btn btn-warning" role="button"
+                <a th:if="${user.getRolesString().contains('ROLE_ADMIN') && user.getRoles().size() > 1}" class="btn btn-warning" role="button"
                    th:href="@{users/remove-admin-role/{id}(id=${user.id})}">REMOVE ADMIN ROLE</a>
                 <a th:unless="${user.getRolesString().contains('ROLE_ADMIN')}" class="btn btn-warning" role="button"
                    th:href="@{users/give-admin-role/{id}(id=${user.id})}">GIVE ADMIN ROLE</a></td>
             <td>
                 <a class="btn btn-danger" role="button"
                    th:href="@{users/delete/{id}(id=${user.id})}">DELETE</a></td>
-            </td>
         </tr>
         </tbody>
     </table>

@@ -42,6 +42,7 @@ public abstract class GardenProduct implements Expirationable {
         return true;
     }
 
+
     public boolean isFruit() {
         return this instanceof Fruit;
     }

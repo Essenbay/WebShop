@@ -18,7 +18,6 @@ import java.util.List;
 
 //Todo: Implement Factory pattern
 //Todo: Implement singleton to shopping cart
-//Todo: Implement strategy
 @Controller
 public class AdminController {
     private final GardenProductsServiceImpl gardenProductsService;
