@@ -35,7 +35,7 @@ public abstract class GardenProduct implements Expirationable {
     private String volume;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Brand brand;
+    protected Brand brand;
 
     @Override
     public Boolean toUtilization() {

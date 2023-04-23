@@ -8,7 +8,10 @@ import com.example.webshop.models.models.Vegetable;
 import com.example.webshop.repositories.RoleRepository;
 import com.example.webshop.repositories.UserRepository;
 import com.example.webshop.util.NotFoundException;
+import org.springframework.context.annotation.Scope;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Scope("singleton")
 public class UserService {
 
     private UserRepository userRepository;
@@ -69,7 +73,7 @@ public class UserService {
         if (userOptional.isPresent()) {
             return userOptional.get();
         } else {
-            throw new NotFoundException("Garden product not found");
+            throw new NotFoundException("User not found");
         }
     }
 
@@ -102,5 +106,21 @@ public class UserService {
         Role role = new Role();
         role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return userRepository.findByEmail(email);
+    }
+
+    public void updateUser(User user) {
+        User currentUser = getCurrentUser();
+        currentUser.setName(user.getName());
+        currentUser.setEmail(user.getEmail());
+        if (!user.getPassword().isEmpty()) {
+            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userRepository.save(currentUser);
     }
 }

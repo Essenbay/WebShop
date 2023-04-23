@@ -3,8 +3,7 @@ package com.example.webshop.controllers;
 import com.example.webshop.models.dto.UserDto;
 import com.example.webshop.models.models.*;
 import com.example.webshop.services.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//Todo: Implement Factory pattern
-//Todo: Implement singleton to shopping cart
+@AllArgsConstructor
 @Controller
 public class AdminController {
     private final GardenProductsServiceImpl gardenProductsService;
@@ -26,14 +24,6 @@ public class AdminController {
     private final BrandsServices brandsServices;
 
     private UserService userService;
-
-    public AdminController(GardenProductsServiceImpl gardenProductsService, FruitsService fruitsService, VegetableService vegetableService, BrandsServices brandsServices, UserService userService) {
-        this.gardenProductsService = gardenProductsService;
-        this.fruitsService = fruitsService;
-        this.vegetableService = vegetableService;
-        this.brandsServices = brandsServices;
-        this.userService = userService;
-    }
 
     @GetMapping("admin/products")
     public String findAll(Model model) {
@@ -70,16 +60,26 @@ public class AdminController {
         return "redirect:/users";
     }
 
+    @GetMapping("admin/products/fruit-create")
+    public String createFruitForm(Model model) {
+        GardenProduct fruit = gardenProductsService.getFactory(GardenProductTypes.FRUIT).create();
+        model.addAttribute("fruit", fruit);
+        List<Brand> brands = brandsServices.getAllBrands();
+        model.addAttribute("brands", brands);
+        return "admin/fruit-create";
+    }
+
     @PostMapping("/admin/products/fruit-create")
     public String createFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         fruit.setBrand(brand);
-        gardenProductsService.saveFruit(fruit);
+        fruitsService.saveFruit(fruit);
         return "redirect:/admin/products";
     }
 
     @GetMapping("admin/products/vegetable-create")
-    public String createVegetableForm(Vegetable vegetable, Model model) {
+    public String createVegetableForm(Model model) {
+        GardenProduct vegetable = gardenProductsService.getFactory(GardenProductTypes.VEGETABLE).create();
         model.addAttribute("vegetable", vegetable);
         List<Brand> brands = brandsServices.getAllBrands();
         model.addAttribute("brands", brands);
@@ -90,7 +90,7 @@ public class AdminController {
     public String createVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id) {
         Brand brand = brandsServices.findById(id);
         vegetable.setBrand(brand);
-        gardenProductsService.saveVegetable(vegetable);
+        vegetableService.saveVegetable(vegetable);
         return "redirect:/admin/products";
     }
 

@@ -4,12 +4,14 @@ import com.example.webshop.models.models.Vegetable;
 import com.example.webshop.repositories.VegetablesRepository;
 import com.example.webshop.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Scope("singleton")
 public class VegetableService {
 
     private final VegetablesRepository vegetablesRepository;
@@ -34,9 +36,5 @@ public class VegetableService {
 
     public void saveVegetable(Vegetable vegetable) {
         vegetablesRepository.save(vegetable);
-    }
-
-    public void deleteProduct(Long id) {
-        vegetablesRepository.deleteById(id);
     }
 }
