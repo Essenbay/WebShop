@@ -42,8 +42,15 @@
                     <span class="input-group-text">Brand</span>
                     <select class="form-select" name="brand_id">
                         <option th:each="brand : ${brands}" th:value="${brand.id}"
-                                th:text="${brand.name} + ${' '} + ${brand.country}"
+                                th:text="${brand.name}"
                                 th:selected="${brand.id == fruit.brand.id}"></option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Brand</span>
+                    <select class="form-select" name="country_id">
+                        <option th:each="country : ${countries}" th:value="${country.id}"
+                                th:text="${country.name}"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-info mb-3" value="Update fruit">Update Fruit</button>

@@ -37,6 +37,9 @@ public abstract class GardenProduct implements Expirationable {
     @ManyToOne(fetch = FetchType.EAGER)
     protected Brand brand;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    protected Country country;
+
     @Override
     public Boolean toUtilization() {
         return true;

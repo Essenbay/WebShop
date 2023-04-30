@@ -22,14 +22,16 @@ public class CustomerController {
     private final FruitsService fruitsService;
     private final VegetableService vegetableService;
     private final BrandsServices brandsServices;
+    private final CountryServices countryServices;
     private final CartService cartService;
 
     @Autowired
-    public CustomerController(GardenProductsServiceImpl gardenProductsService, FruitsService fruitsService, VegetableService vegetableService, BrandsServices brandsServices, CartService cartService) {
+    public CustomerController(GardenProductsServiceImpl gardenProductsService, FruitsService fruitsService, VegetableService vegetableService, BrandsServices brandsServices, CountryServices countryServices, CartService cartService) {
         this.gardenProductsService = gardenProductsService;
         this.fruitsService = fruitsService;
         this.vegetableService = vegetableService;
         this.brandsServices = brandsServices;
+        this.countryServices = countryServices;
         this.cartService = cartService;
 
     }
@@ -42,7 +44,6 @@ public class CustomerController {
         List<GardenProduct> products = new ArrayList<>(fruitsService.getAllFruits());
         products.addAll(vegetableService.getAllVegetables());
         model.addAttribute("products", products);
-
         return "customer/customer-product-list";
     }
 

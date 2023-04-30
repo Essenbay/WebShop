@@ -43,7 +43,14 @@
                     <span class="input-group-text">Brand</span>
                     <select class="form-select" name="brand_id">
                         <option th:each="brand : ${brands}" th:value="${brand.id}"
-                                th:text="${brand.name} + ${' '} + ${brand.country}"></option>
+                                th:text="${brand.name}"></option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Brand</span>
+                    <select class="form-select" name="country_id">
+                        <option th:each="country : ${countries}" th:value="${country.id}"
+                                th:text="${country.name}"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-success mb-3" value="Create Fruit">Add Fruit</button>

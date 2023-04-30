@@ -22,7 +22,7 @@ public class AdminController {
     private final FruitsService fruitsService;
     private final VegetableService vegetableService;
     private final BrandsServices brandsServices;
-
+    private final CountryServices countryServices;
     private UserService userService;
 
     @GetMapping("admin/products")
@@ -66,13 +66,17 @@ public class AdminController {
         model.addAttribute("fruit", fruit);
         List<Brand> brands = brandsServices.getAllBrands();
         model.addAttribute("brands", brands);
+        List<Country> countries = countryServices.getAllCountries();
+        model.addAttribute("countries", countries);
         return "admin/fruit-create";
     }
 
     @PostMapping("/admin/products/fruit-create")
-    public String createFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id) {
-        Brand brand = brandsServices.findById(id);
+    public String createFruit(Fruit fruit, @RequestParam(name = "brand_id") Long brandId, @RequestParam(name = "country_id") Long countryId) {
+        Brand brand = brandsServices.findById(brandId);
         fruit.setBrand(brand);
+        Country country = countryServices.findById(countryId);
+        fruit.setCountry(country);
         fruitsService.saveFruit(fruit);
         return "redirect:/admin/products";
     }
@@ -83,13 +87,17 @@ public class AdminController {
         model.addAttribute("vegetable", vegetable);
         List<Brand> brands = brandsServices.getAllBrands();
         model.addAttribute("brands", brands);
+        List<Country> countries = countryServices.getAllCountries();
+        model.addAttribute("countries", countries);
         return "admin/vegetable-create";
     }
 
     @PostMapping("/admin/products/vegetable-create")
-    public String createVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id) {
-        Brand brand = brandsServices.findById(id);
+    public String createVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long brandId, @RequestParam(name = "country_id") Long countryId) {
+        Brand brand = brandsServices.findById(brandId);
         vegetable.setBrand(brand);
+        Country country = countryServices.findById(countryId);
+        vegetable.setCountry(country);
         vegetableService.saveVegetable(vegetable);
         return "redirect:/admin/products";
     }
@@ -106,13 +114,17 @@ public class AdminController {
         model.addAttribute("fruit", fruit);
         List<Brand> brands = brandsServices.getAllBrands();
         model.addAttribute("brands", brands);
+        List<Country> countries = countryServices.getAllCountries();
+        model.addAttribute("countries", countries);
         return "admin/fruit-update";
     }
 
     @PostMapping("/admin/products/fruit-update")
-    public String updateFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id) {
+    public String updateFruit(Fruit fruit, @RequestParam(name = "brand_id") Long id, @RequestParam(name = "country_id") Long countryId) {
         Brand brand = brandsServices.findById(id);
         fruit.setBrand(brand);
+        Country country = countryServices.findById(countryId);
+        fruit.setCountry(country);
         fruitsService.saveFruit(fruit);
         return "redirect:/admin/products";
     }
@@ -123,13 +135,17 @@ public class AdminController {
         model.addAttribute("vegetable", vegetable);
         List<Brand> brands = brandsServices.getAllBrands();
         model.addAttribute("brands", brands);
+        List<Country> countries = countryServices.getAllCountries();
+        model.addAttribute("countries", countries);
         return "admin/vegetable-update";
     }
 
     @PostMapping("/admin/products/vegetable-update")
-    public String updateVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id) {
+    public String updateVegetable(Vegetable vegetable, @RequestParam(name = "brand_id") Long id, @RequestParam(name = "country_id") Long countryId) {
         Brand brand = brandsServices.findById(id);
         vegetable.setBrand(brand);
+        Country country = countryServices.findById(countryId);
+        vegetable.setCountry(country);
         vegetableService.saveVegetable(vegetable);
         return "redirect:/admin/products";
     }

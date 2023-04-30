@@ -34,6 +34,7 @@
                         <th>Price</th>
                         <th>Expiration date</th>
                         <th>Brand</th>
+                        <th>Country</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,7 +44,8 @@
                         <td th:text="${product.volume}"></td>
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.getExpirationDate().toString()}"></td>
-                        <td th:text="${product.brand.name} + ${' '} + ${product.brand.country}"></td>
+                        <td th:text="${product.brand.name}"></td>
+                        <td th:text="${product.country.name}"></td>
                         <td>
                             <a th:if="${product.isFruit()}" class="btn btn-warning" role="button"
                                th:href="@{products/fruit-update/{id}(id=${product.id})}">Update Fruit</a>

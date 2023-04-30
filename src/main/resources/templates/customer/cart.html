@@ -27,6 +27,7 @@
                         <th>Price</th>
                         <th>Expiration date</th>
                         <th>Brand</th>
+                        <th>Country</th>
                         <th>Remove from Cart</th>
                     </tr>
                     </thead>
@@ -37,7 +38,8 @@
                         <td th:text="${product.volume}"></td>
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.getExpirationDate().toString()}"></td>
-                        <td th:text="${product.brand.name} + ${' '} + ${product.brand.country}"></td>
+                        <td th:text="${product.brand.name}"></td>
+                        <td th:text="${product.country.name}"></td>
                         <td>
                             <a class="btn btn-primary" role="button"
                                th:href="@{/cart/remove-item/{id}(id=${product.id})}">Add to cart</a></td>
